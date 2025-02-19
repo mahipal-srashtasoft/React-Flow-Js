@@ -1,5 +1,41 @@
-*{
-  padding: 0px;
-  margin: 0px;
+@import "tailwindcss";
+
+* {
+  /* padding: 0px; */
+  /* margin: 0px; */
   box-sizing: border-box;
+}
+#app {
+  width: 100vw;
+  height: 100vh;
+  border: 3px solid black;
+  border-radius: 20px;
+}
+
+.text-updater-node {
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+}
+
+.text-updater-node label {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+input {
+  border: 1px solid #eee;
+  padding: 5px;
+  border-radius: 5px;
+  background: white;
+  width: 100%;
+  margin: 5px;
+  font-size: 12px;
+}
+.side_popup {
+  width: 407px;
+  position: absolute;
+  right: 14px;
+  top: 80px;
 }

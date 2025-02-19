@@ -1,18 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { ReactFlow } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
+import "./App.css";
+import "@xyflow/react/dist/style.css";
+import Demo from "./Components/demo";
+import Flow from "./Components/CustomeEdge/Flow";
+import FlowWithForms from "./Components/Demo Example/FlowWithForms";
+import Workflow from "./Components/zapier demo/Workflow";
+import WorkflowRedux from "./ReduxExample/Components/Workflow";
+// import Flow from "./Components/Flow";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>App</h1>
+      {/* <Flow /> */}
+      {/* <Demo /> */}
+
+      {/* Custome Edge */}
+      {/* <Flow /> */}
+
+      {/* Form Demo Example */}
+      {/* <FlowWithForms /> */}
+
+      {/* Workflow Like Zepier */}
+      {/* <Workflow /> */}
+
+      {/* Workflow Like Zepier with redux toolkit */}
+      <WorkflowRedux />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
