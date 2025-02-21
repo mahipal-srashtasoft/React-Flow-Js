@@ -4,7 +4,7 @@ import { faBolt } from "@fortawesome/free-solid-svg-icons";
 const initialState = {
   sidePopupShow: false,
   trigger: { label: "Trigger", icon: faBolt },
-  actions: {},
+  actions: {label: "Action", icon: faBolt},
   nodes: [
     {
       id: "1",
@@ -18,16 +18,9 @@ const initialState = {
       data: { label: "Action", nodeNo: 2 },
       position: { x: 250, y: 150 },
     },
-    // {
-    //   id: "3",
-    //   type: "customNode",
-    //   data: { label: "Action", nodeNo: 3 },
-    //   position: { x: 250, y: 300 },
-    // },
   ],
   edges: [
     { id: "e1-2", source: "1", target: "2" },
-    // { id: "e2-3", source: "2", target: "3" },
   ],
   idCounter: 2,
   isPopupOpen: false,
@@ -41,14 +34,12 @@ const workflowSlice = createSlice({
   initialState,
   reducers: {
     setSidePopupShow: (state, action) => {
-      console.log("first", action.payload);
       state.sidePopupShow = action.payload;
     },
     setTrigger: (state, action) => {
       state.trigger = action.payload;
     },
     addNode: (state, action) => {
-      console.log(action, "AAAAA");
       const { parentId, newNode } = action.payload;
       const parentNode = state.nodes.find((node) => node.id === parentId);
       if (!parentNode) return;

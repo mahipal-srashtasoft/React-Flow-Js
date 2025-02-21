@@ -4,9 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { addNode, setPopupState } from "../Slices/workflowSlice";
+import { useSelector } from "react-redux";
 
-const CustomNode = ({ data, id, trigger, actions }) => {
+const CustomNode = ({ data, id }) => {
   const isTrigger = id === "1";
+  const { trigger, actions } = useSelector((state) => state.workflow);
   const nodeInfo = isTrigger
     ? trigger
     : actions[id] || { id, label: "Action", icon: faBolt };

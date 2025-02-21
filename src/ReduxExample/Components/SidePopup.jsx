@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSidePopupShow } from "../Slices/workflowSlice";
 
-const SidePopup = ({ trigger, side_Popup_show }) => {
-  const [isOpen, setIsOpen] = useState(side_Popup_show);
-
+const SidePopup = () => {
   const dispatch = useDispatch();
+  const { trigger, sidePopupShow } = useSelector((state) => state.workflow);
+  const [isOpen, setIsOpen] = useState(sidePopupShow);
+  
 
   useEffect(() => {
-    if (trigger.label === "Trigger" && side_Popup_show) {
+    if (trigger.label === "Trigger" && sidePopupShow) {
         setIsOpen(true);
     }
-}, [side_Popup_show, trigger.label]); // Depend on both variables
-
+}, [sidePopupShow, trigger.label]); // Depend on both variables
 
   return (
     <>

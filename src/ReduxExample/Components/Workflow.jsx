@@ -11,7 +11,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSidePopupShow,
-  addNode,
   updateTriggerNode,
   updateActionNode,
   setPopupState,
@@ -47,12 +46,10 @@ const WorkflowRedux = () => {
       customNode: (props) => (
         <CustomNode
           {...props}
-          trigger={trigger}
-          actions={actions}
         />
       ),
     }),
-    [trigger, actions]
+    []
   );
 
   return (
@@ -91,9 +88,7 @@ const WorkflowRedux = () => {
           updateNode={(label, icon) => dispatch(updateTriggerNode({ label, icon }))}
         />
       )}
-{console.log("sidePopupShow", sidePopupShow)}
-{console.log("trigger", trigger)}
-      <SidePopup trigger={trigger} side_Popup_show={sidePopupShow} />
+      <SidePopup />
     </div>
   );
 };

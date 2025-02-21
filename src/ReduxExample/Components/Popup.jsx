@@ -14,7 +14,7 @@ const apps = [
   { name: "Custom Webhook", icon: faBolt },
 ];
 
-const Popup = ({ onClose, updateNode }) => {
+const Popup = ({ onClose, updateNode, content }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -32,7 +32,7 @@ const Popup = ({ onClose, updateNode }) => {
         />
 
         <div className="mt-4">
-          <h3 className="text-md font-semibold">Select an App</h3>
+          <h3 className="text-md font-semibold">{content}</h3>
           <div className="grid grid-cols-2 gap-2 mt-2">
             {apps.map((app, index) => (
               <div
