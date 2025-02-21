@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Handle, Position } from "@xyflow/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBolt, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { addNode } from "../Slices/workflowSlice";
+import { addNode, setPopupState } from "../Slices/workflowSlice";
 
 const CustomNode = ({ data, id, trigger, actions }) => {
-  const [options, setOptions] = useState(false);
   const isTrigger = id === "1";
   const nodeInfo = isTrigger
     ? trigger
@@ -14,8 +13,25 @@ const CustomNode = ({ data, id, trigger, actions }) => {
 
   const dispatch = useDispatch();
 
+  const handleAddNode = (e) => {
+    e.stopPropagation();
+    dispatch(addNode({ parentId: id, newNode: { id: `${id}-${Date.now()}`, type: 'customNode', data: { label: `Action`, nodeNo: data.nodeNo + 1 }, position: { x: 250, y: 150 } } }));
+  };
+
+  const handleNodeClick = (e) => {
+    e.stopPropagation();
+    dispatch(
+      setPopupState({
+        isPopupOpen: !isTrigger,
+        isTriggerPopup: isTrigger,
+        selectedNodeId: id,
+        popupContent: nodeInfo.label,
+      })
+    );
+  };
+
   return (
-    <div className="bg-white border border-gray-300 rounded-lg shadow p-3 relative flex flex-col items-start cursor-pointer">
+    <div className="bg-white border border-gray-300 rounded-lg shadow p-3 relative flex flex-col items-start cursor-pointer" onClick={handleNodeClick}>
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center bg-gray-200 text-gray-700 font-medium px-2 py-1 rounded-md text-[10px]">
           <FontAwesomeIcon
@@ -32,10 +48,7 @@ const CustomNode = ({ data, id, trigger, actions }) => {
       </p>
       <button
         className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-[10px] bg-gray-500 text-white h-5 w-5 rounded-full shadow-md hover:bg-gray-600 transition flex items-center justify-center"
-        onClick={(e) => {
-          e.stopPropagation();
-          dispatch(addNode({ parentId: id, newNode: { id: `${id}-${Date.now()}`, type: 'customNode', data: { label: `Action`, nodeNo: data.nodeNo + 1 }, position: { x: 250, y: 150 } } }));
-        }}
+        onClick={handleAddNode}
       >
         <FontAwesomeIcon icon={faPlus} className="w-3 h-3 cursor-pointer" />
       </button>

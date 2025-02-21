@@ -10,20 +10,29 @@ const SidePopup = ({ trigger, side_Popup_show }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setIsOpen(side_Popup_show);
-  }, [side_Popup_show]);
+    if (trigger.label === "Trigger" && side_Popup_show) {
+        setIsOpen(true);
+    }
+}, [side_Popup_show, trigger.label]); // Depend on both variables
+
 
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center" style={{ backdropFilter: 'blur(2px)' }}>
-          <div className='side_popup z-50'>
+        <div
+          className="fixed inset-0 z-50 flex justify-center items-center"
+          style={{ backdropFilter: "blur(2px)" }}
+        >
+          <div className="side_popup z-50">
             <div className="bg-white rounded-xl shadow-lg w-full max-w-xl border-2 border-dashed border-cyan-600">
               {/* Header */}
               <div className="flex justify-between items-center p-4 border-b">
                 <h2 className="text-lg font-semibold">1. Select the event</h2>
                 <div className="space-x-3">
-                  <button onClick={() => dispatch(setSidePopupShow(false))} className="cursor-pointer p-1">
+                  <button
+                    onClick={() => dispatch(setSidePopupShow(false))}
+                    className="cursor-pointer p-1"
+                  >
                     <FontAwesomeIcon icon={faXmark} />
                   </button>
                 </div>
@@ -44,9 +53,7 @@ const SidePopup = ({ trigger, side_Popup_show }) => {
                 <label className="block text-sm font-medium mt-4">
                   Trigger event *
                 </label>
-                <select
-                  className="w-full border p-2 rounded-md mt-1"
-                >
+                <select className="w-full border p-2 rounded-md mt-1">
                   <option value="">Choose an event</option>
                   {/* Render trigger events */}
                 </select>

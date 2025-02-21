@@ -11,7 +11,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSidePopupShow,
-  setTrigger,
   addNode,
   updateTriggerNode,
   updateActionNode,
@@ -43,29 +42,17 @@ const WorkflowRedux = () => {
     [setEdges]
   );
 
-  const handleNodeClick = (event, node) => {
-    dispatch(
-      setPopupState({
-        isPopupOpen: node.id !== "1",
-        isTriggerPopup: node.id === "1",
-        selectedNodeId: node.id,
-        popupContent: node.data.label,
-      })
-    );
-  };
-
   const nodeTypes = useMemo(
     () => ({
       customNode: (props) => (
         <CustomNode
           {...props}
-          addNode={(id) => dispatch(addNode({ parentId: id, newNode: { id: `${id}-${Date.now()}`, type: 'customNode', data: { label: `Action`, nodeNo: nodes.length + 1 }, position: { x: 250, y: 150 } } }))}
           trigger={trigger}
           actions={actions}
         />
       ),
     }),
-    [dispatch, trigger, actions, nodes.length]
+    [trigger, actions]
   );
 
   return (
@@ -78,7 +65,6 @@ const WorkflowRedux = () => {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          onNodeClick={handleNodeClick}
           zoomOnScroll={false}
           panOnScroll 
           panOnDrag 
@@ -105,7 +91,8 @@ const WorkflowRedux = () => {
           updateNode={(label, icon) => dispatch(updateTriggerNode({ label, icon }))}
         />
       )}
-
+{console.log("sidePopupShow", sidePopupShow)}
+{console.log("trigger", trigger)}
       <SidePopup trigger={trigger} side_Popup_show={sidePopupShow} />
     </div>
   );
